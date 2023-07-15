@@ -1,4 +1,8 @@
 package com.googleapp.newsapp.db
 
-class ArticleDatabase {
+import androidx.room.Database
+
+@Database()
+abstract class ArticleDatabase {
+
 }
