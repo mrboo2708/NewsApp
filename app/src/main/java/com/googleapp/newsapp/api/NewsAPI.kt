@@ -1,6 +1,6 @@
 package com.googleapp.newsapp.api
 
-import com.googleapp.newsapp.NewsResponse
+import com.googleapp.newsapp.model.NewsResponse
 import com.googleapp.newsapp.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
