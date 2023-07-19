@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.googleapp.newsapp.R
 import com.googleapp.newsapp.adapter.NewsAdapter
@@ -47,6 +48,18 @@ class SearchNewFragment : Fragment() {
         _binding = FragmentSearchNewsBinding.inflate(inflater,container,false)
         viewModel = (activity as MainActivity).viewModel
         setupRecyclerView()
+
+
+        newsAdapter.setOnItemClickListener {//take article to a bundle then attach to navigation component
+            val bundle = Bundle().apply {
+                putSerializable("article",it)
+            }
+            findNavController().navigate(
+                R.id.action_searchNewFragment_to_articleFragment,
+                bundle
+            )
+        }
+
         var job : Job? = null
         //delay job for searching so when you input text to search it will have little delay to avoid too many request
         binding.etSearch.addTextChangedListener {editable ->
@@ -59,6 +72,7 @@ class SearchNewFragment : Fragment() {
                     }
                 }
             }
+
 
         }
         viewModel.searchNews.observe(viewLifecycleOwner, Observer {   response ->
